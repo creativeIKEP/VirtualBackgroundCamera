@@ -30,9 +30,7 @@ Shader "Hidden/SelfieSegmentation/VirtualBackgroundVisuallizer"
             sampler2D _MainTex;
             float4 _MainTex_ST;
             sampler2D _inputImage;
-            int _isBackGroundTexture;
             sampler2D _backImage;
-            float4 _backGroundColor;
             float _threshold;
 
             v2f vert (appdata v)
@@ -47,7 +45,7 @@ Shader "Hidden/SelfieSegmentation/VirtualBackgroundVisuallizer"
             {
                 float4 col = tex2D(_inputImage, i.uv);
                 float4 mask = tex2D(_MainTex, i.uv);
-                float4 back = _isBackGroundTexture ? tex2D(_backImage, i.uv) : _backGroundColor;
+                float4 back = tex2D(_backImage, i.uv);
                 float4 p = (mask.r >= _threshold) ? col : back;
                 return p;
             }

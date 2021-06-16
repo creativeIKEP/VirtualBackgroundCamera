@@ -36,9 +36,7 @@ public class VirtualBackgroundVisuallizer : MonoBehaviour
         //Set segmentation texutre to `_MainTex` variable of shader.
         compositeImage.texture = segmentation.texture;
         material.SetTexture("_inputImage", webCamCtrlUI.webCamImage);
-        material.SetInt("_isBackGroundTexture", visualizeCtrlUI.isBackGroundTexture?1:0);
         material.SetTexture("_backImage", visualizeCtrlUI.backGroundTexture);
-        material.SetVector("_backGroundColor", visualizeCtrlUI.backGroundColor);
         material.SetFloat("_threshold", visualizeCtrlUI.threshold);
     } 
 
