@@ -4,14 +4,12 @@ using Mediapipe.SelfieSegmentation;
 
 public class VirtualBackgroundVisuallizer : MonoBehaviour
 {
-    [SerializeField] WebCamInput webCamInput;
+    [SerializeField] WebCamCtrlUI webCamCtrlUI;
+    [SerializeField] VisualizeCtrlUI visualizeCtrlUI;
     [SerializeField] RawImage compositeImage;
     [SerializeField] SelfieSegmentationResource resource;
     [SerializeField] Shader shader;
-    [SerializeField] bool isBackGroundTexture = false;
-    [SerializeField] Texture backGroundTexture;
-    [SerializeField] Color backGroundColor = Color.green;
-    [SerializeField, Range(0, 1)] float threshold = 0.95f;
+    [SerializeField] Texture noInputTexture;
 
     SelfieSegmentation segmentation;
     Material material;
@@ -24,16 +22,24 @@ public class VirtualBackgroundVisuallizer : MonoBehaviour
     }
 
     void LateUpdate(){
+        if(webCamCtrlUI.webCamImage == null){
+            compositeImage.material = null;
+            compositeImage.texture = noInputTexture;
+            return;
+        }
+
+        compositeImage.material = material;
+
         // Predict segmentation by neural network model.
-        segmentation.ProcessImage(webCamInput.inputImageTexture);
+        segmentation.ProcessImage(webCamCtrlUI.webCamImage);
         
         //Set segmentation texutre to `_MainTex` variable of shader.
         compositeImage.texture = segmentation.texture;
-        material.SetTexture("_inputImage", webCamInput.inputImageTexture);
-        material.SetInt("_isBackGroundTexture", isBackGroundTexture?1:0);
-        material.SetTexture("_backImage", backGroundTexture);
-        material.SetVector("_backGroundColor", backGroundColor);
-        material.SetFloat("_threshold", threshold);
+        material.SetTexture("_inputImage", webCamCtrlUI.webCamImage);
+        material.SetInt("_isBackGroundTexture", visualizeCtrlUI.isBackGroundTexture?1:0);
+        material.SetTexture("_backImage", visualizeCtrlUI.backGroundTexture);
+        material.SetVector("_backGroundColor", visualizeCtrlUI.backGroundColor);
+        material.SetFloat("_threshold", visualizeCtrlUI.threshold);
     } 
 
     void OnApplicationQuit(){

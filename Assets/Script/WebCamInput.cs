@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 
-public class WebCamInput : MonoBehaviour
+public class WebCamInput
 {
-    [SerializeField] string webCamName;
-    [SerializeField] Vector2 webCamResolution = new Vector2(1920, 1080);
-
     // Provide input image Texture.
     public Texture inputImageTexture{
         get{
@@ -15,14 +12,22 @@ public class WebCamInput : MonoBehaviour
     WebCamTexture webCamTexture;
     RenderTexture inputRT;
 
-    void Start()
-    {
-        webCamTexture = new WebCamTexture(webCamName, (int)webCamResolution.x, (int)webCamResolution.y);
-        webCamTexture.Play();
-        inputRT = new RenderTexture((int)webCamResolution.x, (int)webCamResolution.y, 0);
+
+    public WebCamInput(string webCamName){
+        webCamTexture = new WebCamTexture(webCamName);
     }
 
-    void Update()
+    public void CaptureStart(){
+        webCamTexture.Play();
+        inputRT = new RenderTexture(webCamTexture.width, webCamTexture.height, 0);
+    }
+
+    public void CaptureStop(){
+        if (webCamTexture != null) webCamTexture.Stop();
+        if (inputRT != null) inputRT.Release();
+    }
+
+    public void UpdateTexture()
     {
         if(!webCamTexture.didUpdateThisFrame) return;
 
@@ -35,10 +40,5 @@ public class WebCamInput : MonoBehaviour
         var offset = new Vector2((1 - aspectGap) / 2, vMirrored ? 1 : 0);
 
         Graphics.Blit(webCamTexture, inputRT, scale, offset);
-    }
-
-    void OnDestroy(){
-        if (webCamTexture != null) Destroy(webCamTexture);
-        if (inputRT != null) Destroy(inputRT);
     }
 }
