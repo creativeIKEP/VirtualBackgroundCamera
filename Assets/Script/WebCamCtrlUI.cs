@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class WebCamCtrlUI : MonoBehaviour
 {
     [SerializeField] Dropdown webcamSelect;
+    [SerializeField] InputField widthInput;
+    [SerializeField] InputField heightInput;
 
     public Texture webCamImage{
         get{
@@ -36,10 +38,20 @@ public class WebCamCtrlUI : MonoBehaviour
             webCam = null;
             return;
         }
-
+        
         var webCamName = webcamSelect.options[webcamSelect.value].text;
-        webCam = new WebCamInput(webCamName);
-        webCam.CaptureStart();
+        if(string.IsNullOrEmpty(widthInput.text) || string.IsNullOrEmpty(heightInput.text)){
+            webCam = new WebCamInput(webCamName);
+        }
+        else{
+            int w = int.Parse(widthInput.text);
+            int h = int.Parse(heightInput.text);
+            webCam = new WebCamInput(webCamName, w, h);
+        }
+
+        var size = webCam.CaptureStart();
+        widthInput.text = size.x.ToString();
+        heightInput.text = size.y.ToString();
     }
 
     void OnApplicationQuit(){

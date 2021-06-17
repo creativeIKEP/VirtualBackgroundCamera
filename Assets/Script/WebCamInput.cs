@@ -17,9 +17,14 @@ public class WebCamInput
         webCamTexture = new WebCamTexture(webCamName);
     }
 
-    public void CaptureStart(){
+    public WebCamInput(string webCamName, int w, int h){
+        webCamTexture = new WebCamTexture(webCamName, w, h);
+    }
+
+    public Vector2 CaptureStart(){
         webCamTexture.Play();
         inputRT = new RenderTexture(webCamTexture.width, webCamTexture.height, 0);
+        return new Vector2(webCamTexture.width, webCamTexture.height);
     }
 
     public void CaptureStop(){

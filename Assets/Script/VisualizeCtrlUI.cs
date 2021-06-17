@@ -7,17 +7,19 @@ public class VisualizeCtrlUI : MonoBehaviour
 {
     [SerializeField] Texture defaultBackTexture;
     [SerializeField] Dropdown backTextureSelect;
+    [SerializeField] Slider thresholdSlider;
+    [SerializeField] Text thresholdValueText;
 
+
+    [System.NonSerialized] public Texture backGroundTexture;
+    [System.NonSerialized] public float threshold = 0.95f;
+    
     readonly string loadedImagePath = "/LoadedImages";
-
-    public Texture backGroundTexture;
-
-    //TODO: UIに変更する
-    [Range(0, 1)] public float threshold = 0.95f;
-
 
     void Start(){
         backGroundTexture = defaultBackTexture;
+        threshold = thresholdSlider.value;
+        thresholdValueText.text = threshold.ToString("F2");
         CreateImageOptions();
     }
 
@@ -70,5 +72,10 @@ public class VisualizeCtrlUI : MonoBehaviour
         option.text = filename;
         backTextureSelect.options.Add(option);
         backTextureSelect.value = backTextureSelect.options.Count - 1;
+    }
+
+    public void ThresholdChanged(){
+        threshold = thresholdSlider.value;
+        thresholdValueText.text = thresholdSlider.value.ToString("F2");
     }
 }
