@@ -2,6 +2,7 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Klak.Spout;
 
 public class VisualizeCtrlUI : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class VisualizeCtrlUI : MonoBehaviour
     [SerializeField] Dropdown backTextureSelect;
     [SerializeField] Slider thresholdSlider;
     [SerializeField] Text thresholdValueText;
+    [SerializeField] Toggle unityCaptureToggle;
+    [SerializeField] Toggle spoutToggle;
 
 
     [System.NonSerialized] public Texture backGroundTexture;
@@ -20,7 +23,10 @@ public class VisualizeCtrlUI : MonoBehaviour
         backGroundTexture = defaultBackTexture;
         threshold = thresholdSlider.value;
         thresholdValueText.text = threshold.ToString("F2");
+        
         CreateImageOptions();
+        UnityCaptureSwitched();
+        SpoutSwitched();
     }
 
     void CreateImageOptions(){
@@ -77,5 +83,15 @@ public class VisualizeCtrlUI : MonoBehaviour
     public void ThresholdChanged(){
         threshold = thresholdSlider.value;
         thresholdValueText.text = thresholdSlider.value.ToString("F2");
+    }
+
+    public void UnityCaptureSwitched(){
+        var unityCapture = Camera.main.GetComponent<UnityCapture>();
+        unityCapture.enabled = unityCaptureToggle.isOn;
+    }
+
+    public void SpoutSwitched(){
+        var spout = Camera.main.GetComponent<SpoutSender>();
+        spout.enabled = spoutToggle.isOn;
     }
 }

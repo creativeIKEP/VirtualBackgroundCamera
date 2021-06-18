@@ -52,6 +52,13 @@
       },
       "hash": "ffb03efbbc7c0e3aa014441fe72bc09b8ff63240"
     },
+    "jp.keijiro.klak.spout": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://registry.npmjs.com"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
