@@ -8,6 +8,7 @@ public class VisualizeCtrlUI : MonoBehaviour
 {
     [SerializeField] Texture defaultBackTexture;
     [SerializeField] Dropdown backTextureSelect;
+    [SerializeField] Toggle mirrorModeToggle;
     [SerializeField] Slider thresholdSlider;
     [SerializeField] Text thresholdValueText;
     [SerializeField] Toggle unityCaptureToggle;
@@ -78,6 +79,11 @@ public class VisualizeCtrlUI : MonoBehaviour
         option.text = filename;
         backTextureSelect.options.Add(option);
         backTextureSelect.value = backTextureSelect.options.Count - 1;
+    }
+
+    public void MirrorModeSwitched(){
+        var unityCapture = Camera.main.GetComponent<UnityCapture>();
+        unityCapture.MirrorMode = mirrorModeToggle.isOn ? UnityCapture.EMirrorMode.MirrorHorizontally : UnityCapture.EMirrorMode.Disabled;
     }
 
     public void ThresholdChanged(){
