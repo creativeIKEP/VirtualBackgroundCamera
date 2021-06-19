@@ -1,4 +1,6 @@
 # VirtualBackgroundCamera
+![demo](https://user-images.githubusercontent.com/34697515/122642140-dadf1880-d143-11eb-9e8a-fc2bc6adb669.gif)
+
 **VirtualBackgroundCamera** is a virtual camera application that allows you to use a virtual background in any web meeting.
 
 ---
@@ -48,6 +50,7 @@ VirtualBackgroundCamera is supported PNG(`.png`, `.PNG`) or JPG(`.jpg`, `.jpeg`,
 #### Output Selection
 Rendered images can be output as the virtual camera image if you setup [Unity Capture](https://github.com/schellingb/UnityCapture) or [Spout](https://spout.zeal.co/) in the [Install section](#Install).
 - Select the `Use UnityCapture` toggle and select `Unity Video Capture` camera in another applications if you setup [Unity Capture](https://github.com/schellingb/UnityCapture).
+  - You can flip the image horizontally by on/off of the `Mirror mode` toggle if you use UnityCapture.
 - Select the `Use Spout` toggle and select `SpoutCam` camera in another applications if you setup [Spout](https://spout.zeal.co/).
 
 ---
