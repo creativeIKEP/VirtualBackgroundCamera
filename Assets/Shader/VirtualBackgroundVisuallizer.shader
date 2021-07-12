@@ -43,11 +43,14 @@ Shader "Hidden/SelfieSegmentation/VirtualBackgroundVisuallizer"
 
             float4 frag (v2f i) : SV_Target
             {
-                float4 col = tex2D(_inputImage, i.uv);
-                float4 mask = tex2D(_MainTex, i.uv);
-                float4 back = tex2D(_backImage, i.uv);
-                float4 p = (mask.r >= _threshold) ? col : back;
-                return p;
+                float3 col = tex2D(_inputImage, i.uv).rgb;
+                float mask = tex2D(_MainTex, i.uv).r;
+                float3 back = tex2D(_backImage, i.uv).rgb;;
+                
+                float3 middle = col < 0.5 ? 2 * back * col : 1 - 2 * (1 - back) * (1 - col);
+                float3 rgb = lerp(back, middle, saturate(mask / 0.95));
+                rgb = lerp(rgb, col, saturate(mask));
+                return float4(rgb, 1);
             }
             ENDCG
         }
