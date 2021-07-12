@@ -37,7 +37,6 @@ public class VirtualBackgroundVisuallizer : MonoBehaviour
         compositeImage.texture = segmentation.texture;
         material.SetTexture("_inputImage", webCamCtrlUI.webCamImage);
         material.SetTexture("_backImage", visualizeCtrlUI.backGroundTexture);
-        material.SetFloat("_threshold", visualizeCtrlUI.threshold);
     } 
 
     void OnApplicationQuit(){
