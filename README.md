@@ -13,7 +13,7 @@ VirtualBackgroundCamera uses the following packages:
 ---
 ### Install
 VirtualBackgroundCamera can be downloaded from [release page](https://github.com/creativeIKEP/VirtualBackgroundCamera/releases).
-After download, unzip the zip file and run the `VirtualBackgroundCamera.exe`.
+Download installer(`.exe` file) from [release page](https://github.com/creativeIKEP/VirtualBackgroundCamera/releases) and execute it.
 
 In order to use the VirtualBackgroundCamera video as a virtual camera in other applications, you need to setup one of the below dependencies package.
 
