@@ -9,21 +9,16 @@ public class VisualizeCtrlUI : MonoBehaviour
     [SerializeField] Texture defaultBackTexture;
     [SerializeField] Dropdown backTextureSelect;
     [SerializeField] Toggle mirrorModeToggle;
-    [SerializeField] Slider thresholdSlider;
-    [SerializeField] Text thresholdValueText;
     [SerializeField] Toggle unityCaptureToggle;
     [SerializeField] Toggle spoutToggle;
 
 
     [System.NonSerialized] public Texture backGroundTexture;
-    [System.NonSerialized] public float threshold = 0.95f;
     
     readonly string loadedImagePath = "/LoadedImages";
 
     void Start(){
         backGroundTexture = defaultBackTexture;
-        threshold = thresholdSlider.value;
-        thresholdValueText.text = threshold.ToString("F2");
         
         CreateImageOptions();
         UnityCaptureSwitched();
@@ -84,11 +79,6 @@ public class VisualizeCtrlUI : MonoBehaviour
     public void MirrorModeSwitched(){
         var unityCapture = Camera.main.GetComponent<UnityCapture>();
         unityCapture.MirrorMode = mirrorModeToggle.isOn ? UnityCapture.EMirrorMode.MirrorHorizontally : UnityCapture.EMirrorMode.Disabled;
-    }
-
-    public void ThresholdChanged(){
-        threshold = thresholdSlider.value;
-        thresholdValueText.text = thresholdSlider.value.ToString("F2");
     }
 
     public void UnityCaptureSwitched(){
