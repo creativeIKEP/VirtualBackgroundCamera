@@ -28,6 +28,12 @@ public class VirtualBackgroundVisuallizer : MonoBehaviour
             return;
         }
 
+        if(visualizeCtrlUI.backGroundTexture == null){
+            compositeImage.material = null;
+            compositeImage.texture = webCamCtrlUI.webCamImage;
+            return;
+        }
+
         compositeImage.material = material;
 
         // Predict segmentation by neural network model.

@@ -2,7 +2,6 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Klak.Spout;
 
 public class VisualizeCtrlUI : MonoBehaviour
 {
@@ -16,13 +15,13 @@ public class VisualizeCtrlUI : MonoBehaviour
     [System.NonSerialized] public Texture backGroundTexture;
     
     readonly string loadedImagePath = "/LoadedImages";
+    readonly string backOffName = "None";
 
     void Start(){
         backGroundTexture = defaultBackTexture;
         
         CreateImageOptions();
         UnityCaptureSwitched();
-        SpoutSwitched();
     }
 
     void CreateImageOptions(){
@@ -33,6 +32,7 @@ public class VisualizeCtrlUI : MonoBehaviour
         
         var backTextureSelectOptions = new List<string>();
         backTextureSelectOptions.Add(defaultBackTexture.name);
+        backTextureSelectOptions.Add(backOffName);
         foreach(var path in imagePathes){
             backTextureSelectOptions.Add(Path.GetFileName(path));
         }
@@ -44,6 +44,11 @@ public class VisualizeCtrlUI : MonoBehaviour
         var filename = backTextureSelect.options[backTextureSelect.value].text;
         if(filename == defaultBackTexture.name){
             backGroundTexture = defaultBackTexture;
+            return;
+        }
+
+        if(filename == backOffName){
+            backGroundTexture = null;
             return;
         }
 
@@ -84,10 +89,5 @@ public class VisualizeCtrlUI : MonoBehaviour
     public void UnityCaptureSwitched(){
         var unityCapture = Camera.main.GetComponent<UnityCapture>();
         unityCapture.enabled = unityCaptureToggle.isOn;
-    }
-
-    public void SpoutSwitched(){
-        var spout = Camera.main.GetComponent<SpoutSender>();
-        spout.enabled = spoutToggle.isOn;
     }
 }
