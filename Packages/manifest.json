@@ -1,13 +1,4 @@
 {
-  "scopedRegistries": [
-    {
-      "name": "Keijiro",
-      "url": "https://registry.npmjs.com",
-      "scopes": [
-        "jp.keijiro"
-      ]
-    }
-  ],
   "dependencies": {
     "com.unity.ide.vscode": "1.2.3",
     "com.unity.ugui": "1.0.0",

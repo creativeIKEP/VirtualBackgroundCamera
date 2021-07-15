@@ -9,7 +9,6 @@ public class VisualizeCtrlUI : MonoBehaviour
     [SerializeField] Dropdown backTextureSelect;
     [SerializeField] Toggle mirrorModeToggle;
     [SerializeField] Toggle unityCaptureToggle;
-    [SerializeField] Toggle spoutToggle;
 
 
     [System.NonSerialized] public Texture backGroundTexture;
