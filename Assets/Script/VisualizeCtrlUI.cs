@@ -2,32 +2,25 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Klak.Spout;
 
 public class VisualizeCtrlUI : MonoBehaviour
 {
     [SerializeField] Texture defaultBackTexture;
     [SerializeField] Dropdown backTextureSelect;
     [SerializeField] Toggle mirrorModeToggle;
-    [SerializeField] Slider thresholdSlider;
-    [SerializeField] Text thresholdValueText;
     [SerializeField] Toggle unityCaptureToggle;
-    [SerializeField] Toggle spoutToggle;
 
 
     [System.NonSerialized] public Texture backGroundTexture;
-    [System.NonSerialized] public float threshold = 0.95f;
     
     readonly string loadedImagePath = "/LoadedImages";
+    readonly string backOffName = "None";
 
     void Start(){
         backGroundTexture = defaultBackTexture;
-        threshold = thresholdSlider.value;
-        thresholdValueText.text = threshold.ToString("F2");
         
         CreateImageOptions();
         UnityCaptureSwitched();
-        SpoutSwitched();
     }
 
     void CreateImageOptions(){
@@ -38,6 +31,7 @@ public class VisualizeCtrlUI : MonoBehaviour
         
         var backTextureSelectOptions = new List<string>();
         backTextureSelectOptions.Add(defaultBackTexture.name);
+        backTextureSelectOptions.Add(backOffName);
         foreach(var path in imagePathes){
             backTextureSelectOptions.Add(Path.GetFileName(path));
         }
@@ -49,6 +43,11 @@ public class VisualizeCtrlUI : MonoBehaviour
         var filename = backTextureSelect.options[backTextureSelect.value].text;
         if(filename == defaultBackTexture.name){
             backGroundTexture = defaultBackTexture;
+            return;
+        }
+
+        if(filename == backOffName){
+            backGroundTexture = null;
             return;
         }
 
@@ -86,18 +85,8 @@ public class VisualizeCtrlUI : MonoBehaviour
         unityCapture.MirrorMode = mirrorModeToggle.isOn ? UnityCapture.EMirrorMode.MirrorHorizontally : UnityCapture.EMirrorMode.Disabled;
     }
 
-    public void ThresholdChanged(){
-        threshold = thresholdSlider.value;
-        thresholdValueText.text = thresholdSlider.value.ToString("F2");
-    }
-
     public void UnityCaptureSwitched(){
         var unityCapture = Camera.main.GetComponent<UnityCapture>();
         unityCapture.enabled = unityCaptureToggle.isOn;
-    }
-
-    public void SpoutSwitched(){
-        var spout = Camera.main.GetComponent<SpoutSender>();
-        spout.enabled = spoutToggle.isOn;
     }
 }

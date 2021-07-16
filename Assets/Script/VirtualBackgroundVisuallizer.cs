@@ -28,6 +28,12 @@ public class VirtualBackgroundVisuallizer : MonoBehaviour
             return;
         }
 
+        if(visualizeCtrlUI.backGroundTexture == null){
+            compositeImage.material = null;
+            compositeImage.texture = webCamCtrlUI.webCamImage;
+            return;
+        }
+
         compositeImage.material = material;
 
         // Predict segmentation by neural network model.
@@ -37,7 +43,6 @@ public class VirtualBackgroundVisuallizer : MonoBehaviour
         compositeImage.texture = segmentation.texture;
         material.SetTexture("_inputImage", webCamCtrlUI.webCamImage);
         material.SetTexture("_backImage", visualizeCtrlUI.backGroundTexture);
-        material.SetFloat("_threshold", visualizeCtrlUI.threshold);
     } 
 
     void OnApplicationQuit(){
