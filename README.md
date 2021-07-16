@@ -23,11 +23,11 @@ Download installer(`VirtualBackgroundCamera-1.1.0setup.exe` file) from [release 
 
 #### Control of Virtual BackGround
 - You can change the background image from pull down.
-List of images in pull down were loaded PNG files from `VirtualBackgroundCamera_Data > LoadedImages` directory (default image is not include this).
+List of images in pull down were loaded PNG files from `C:/Users/<user name>/AppData/LocalLow/IKEP/VirtualBackgroundCamera/LoadedImages` directory (default image is not include this).
 You can output camera original image if you select the `None` option from pull down.
 - You can load new images as the background image from the `New image` button.
 VirtualBackgroundCamera is supported PNG(`.png`, `.PNG`) or JPG(`.jpg`, `.jpeg`, `.JPG`, `.JPEG`) images.
-  - Loaded background images were convert PNG images, and save to `VirtualBackgroundCamera_Data > LoadedImages` directory.
+  - Loaded background images were convert PNG images, and save to `C:/Users/<user name>/AppData/LocalLow/IKEP/VirtualBackgroundCamera/LoadedImages` directory.
   - You can continue to use the image is loaded once, if application is restarting.
 - You can flip the image horizontally by on/off of the `Mirror mode` toggle if `Output on/off` toggle is on.
 

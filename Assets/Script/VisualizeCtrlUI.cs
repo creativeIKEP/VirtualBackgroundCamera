@@ -24,10 +24,10 @@ public class VisualizeCtrlUI : MonoBehaviour
     }
 
     void CreateImageOptions(){
-        if(!Directory.Exists(Application.dataPath + loadedImagePath)){
-            Directory.CreateDirectory(Application.dataPath + loadedImagePath);
+        if(!Directory.Exists(Application.persistentDataPath + loadedImagePath)){
+            Directory.CreateDirectory(Application.persistentDataPath + loadedImagePath);
         }
-        var imagePathes = Directory.GetFiles(Application.dataPath + loadedImagePath, "*.png");
+        var imagePathes = Directory.GetFiles(Application.persistentDataPath + loadedImagePath, "*.png");
         
         var backTextureSelectOptions = new List<string>();
         backTextureSelectOptions.Add(defaultBackTexture.name);
@@ -51,7 +51,7 @@ public class VisualizeCtrlUI : MonoBehaviour
             return;
         }
 
-        byte[] bytes = File.ReadAllBytes(Application.dataPath + loadedImagePath + "/" + filename);
+        byte[] bytes = File.ReadAllBytes(Application.persistentDataPath + loadedImagePath + "/" + filename);
         Texture2D texture = new Texture2D(1, 1);
         bool isLoadSuccess = texture.LoadImage(bytes);
         if(!isLoadSuccess) return;
@@ -71,7 +71,7 @@ public class VisualizeCtrlUI : MonoBehaviour
         backGroundTexture = texture;
 
         var filename = Path.GetFileNameWithoutExtension(path) + ".png";
-        var savePath = Application.dataPath + loadedImagePath + "/" + filename;
+        var savePath = Application.persistentDataPath + loadedImagePath + "/" + filename;
         File.WriteAllBytes(savePath, texture.EncodeToPNG());
 
         var option = new Dropdown.OptionData();
