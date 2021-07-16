@@ -1,5 +1,5 @@
 # VirtualBackgroundCamera
-![demo](https://user-images.githubusercontent.com/34697515/122642140-dadf1880-d143-11eb-9e8a-fc2bc6adb669.gif)
+![demo](https://user-images.githubusercontent.com/34697515/125956182-45b99d42-ad88-4972-a3ae-2de85611047e.mp4)
 
 **VirtualBackgroundCamera** is a virtual camera application that allows you to use a virtual background in any applications.
 
